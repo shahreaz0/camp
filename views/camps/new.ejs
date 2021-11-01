@@ -1,0 +1,64 @@
+<%- include("../partials/top") %>
+
+<div class="ui grid centered">
+    <!-- column -->
+    <div class="sixteen wide mobile fourteen wide tablet twelve wide computer column">
+       <!-- Form -->
+       <form class="ui form add-book" action="/camps" method="POST" enctype="multipart/form-data">
+          <!-- first row 2 fields -->
+          <div class="fields">
+             <div class="required field eight wide">
+                <label>Camp Name</label>
+                <input type="text" name="name">
+             </div>
+             <div class="required field eight wide">
+                <label>Camp Location</label>
+                <input type="text" name="location">
+             </div>
+          </div>
+          <!-- Second row 1 fields -->
+          <div class="fields">
+             <div class="field sixteen wide">
+                <label>Description</label>
+                <textarea rows="8" name="description" id="add-book-textarea"></textarea>
+             </div>
+          </div>
+          <!-- Third row 2 fields -->
+          <div class="fields">
+             <div class="required field sixteen wide">
+                <label>Camp Image</label>
+                <input name="campImg" type="file" accept="image/*">
+             </div>
+             
+          </div>
+          <!-- Forth row 2 fields and submit button -->
+          <div class="fields">
+            <div class="field four wide">
+                <label>Status</label>
+                <select class="ui dropdown" name="status">
+                   <option value="public">Public</option>
+                   <option value="private">Private</option>
+                </select>
+             </div>
+
+             <div class="required field four wide">
+                <label>Price Range</label>
+                <input type="text" name="price">
+             </div>
+ 
+             <div class="field eight wide">
+                <label>&nbsp;&nbsp;&nbsp;</label>
+                <!-- <input type="submit" value="Add" > -->
+                <button class="ui grey submit button fluid">Add</button>
+             </div>
+             
+          </div>
+          <div class="ui error message"></div>
+       </form>
+    </div>
+ </div>
+
+
+
+
+<%- include("../partials/bottom") %>

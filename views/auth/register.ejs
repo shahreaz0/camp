@@ -1,0 +1,81 @@
+<%- include("../partials/top") %>
+
+<!-- <h1>Register</h1>
+
+<form action="/register" method="POST">
+	<input type="text" name="username" placeholder="username" />
+	<input type="password" name="password" placeholder="password" />
+
+	<input type="submit" value="Submit" />
+</form> -->
+
+<!-- Grid -->
+<div class="ui grid centered">
+	<!-- column -->
+	<div class="sixteen wide mobile fourteen wide tablet twelve wide computer column">
+		<!-- Form -->
+		<form class="ui form signup" action="/register" method="POST">
+			<div class="two fields">
+				<div class="field required">
+					<label>Full Name</label>
+					<input name="fullName" type="text" required />
+				</div>
+				<div class="field">
+					<label>Email</label>
+					<input type="email" name="email" autocomplete="email" />
+				</div>
+			</div>
+			<div class="four fields">
+				<div class="field required">
+					<label>Username</label>
+					<input name="username" type="text" required />
+				</div>
+				<div class="field required">
+					<label>Password</label>
+					<input name="password" type="password" required />
+				</div>
+				<div class="field">
+					<label>Age</label>
+					<input name="age" inputmode="number" />
+				</div>
+				<div class="field">
+					<label>Gender</label>
+					<select class="ui dropdown" name="gender">
+						<option value="">Select</option>
+						<option value="male">Male</option>
+						<option value="female">Female</option>
+						<option value="other">Other</option>
+					</select>
+				</div>
+			</div>
+			<input class="ui primary submit button" type="submit" value="Signup" />
+
+			<div class="ui error message"></div>
+
+			<!-- google sign in button -->
+			<div class="ui grid centered">
+				<div
+					class="fourteen wide mobile ten wide tablet six wide computer column"
+				>
+					<h4 class="ui horizontal divider header">OR</h4>
+					<br />
+
+					<a href="/auth/google">
+						<div class="google-btn">
+							<div class="google-icon-wrapper">
+								<img
+									class="google-icon"
+									src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+								/>
+							</div>
+							<div class="google-btn-text">
+								<p class="btn-text"><b>Sign in with google</b></p>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<%- include("../partials/bottom") %>

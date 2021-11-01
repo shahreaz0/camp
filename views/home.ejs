@@ -1,0 +1,49 @@
+<%- include("partials/top") %>
+
+<section id="header" class="header-section">
+  <h1 class="header-section__title">Campedia</h1>
+  <p class="header-section__text">Share and find Camps</p>
+</section>
+
+
+<h4 class="home ui horizontal divider header">
+  Recently Added
+</h4>
+<div class="ui grid">
+
+  <% camps.forEach(camp => { %>
+  <!-- new card -->
+  <div class="sixteen wide mobile seven wide tablet four wide computer column">
+    <div class="ui card link">
+      <div class="content">
+        <a class="header" href="/camps/<%= camp._id %>">
+          <%= camp.name %> </a>
+          <span id="card__author">in <a href="/<%= camp.location %>/camps"><%= camp.location %></a> </span>
+      </div>
+      <a class="image" href="/camps/<%= camp._id %>">
+        <img src="<%= camp.campImage.url %>">
+      </a>
+      <div class="content">
+        <div class="right floated meta"><%= dateFormat(camp.createdAt) %></div>
+        <img class="ui avatar image" src="<%= camp.creator.thumbnail %>">
+        <a id="tooltip" href="/profile/<%= camp.creator._id %>" data-tippy-content="<%= camp.creator.username%>">
+          <%= locals.user && camp.creator._id.equals(user.id) 
+          ? "You" 
+          : camp.creator.username.length <= 8 ? camp.creator.username : camp.creator.username.substring(0, 8) + "..." %> 
+        </a>
+      </div>
+      <div class="extra content">
+        <span class="right floated">
+          <i class="heart like icon <%= !camp.likedUsers.includes(locals.user && user.id) && "outline" %> <%= !user && "disable" %>" data-bookid="<%= camp._id %>" data-userid="<%= locals.user && user.id %>"></i> 
+          <span class="like-section" data-user="<%= camp._id %>" data-span="<%= camp._id %>"><%= camp.likes %> likes</span>
+          
+        </span>
+        <i class="comment icon"></i> <%= camp.comments.length %> comments
+      </div>
+    </div>
+  </div>
+  <% }) %>
+
+</div>
+
+<%- include("partials/bottom") %>

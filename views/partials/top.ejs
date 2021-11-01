@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= locals.pageTitle ? pageTitle : "Campedia" %></title>
+  <!-- <link rel="icon" href="/img/favicon.png" type="image/png"> -->
+  <!-- fomantic ui -->
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/fomantic-ui@2.8.6/dist/semantic.min.css">
+  <!-- public css -->
+  <link rel='stylesheet' href='/css/main.css' />
+</head>
+
+<body>
+
+  <div class="ui container">
+    <div class="ui small secondary menu stackable">
+      <!-- left menu -->
+      <div class="left menu"> 
+        <% if (user) { %>
+        <a class="item <%= locals.path && path === "/" && "active" %>" href="/">Home</a>
+        <a class="item <%= locals.path && path === "/camps" && "active" %>" href="/camps">All Camps</a>
+        <a class="item <%= locals.path && path === "/camps/new" && "active" %>" href="/camps/new">Add a Camp</a>
+        <% } else { %>
+        <a class="item <%= locals.path && path === "/" && "active" %>" href="/">Home</a>
+        <a class="item <%= locals.path && path === "/camps" && "active" %>" href="/camps">All Camps</a>
+        <% } %>
+      </div>
+      
+      <!-- right menu -->
+      <div class="right menu">
+        <div class="item" id="right-menu">
+          <% if (user) { %>
+          <img class="ui avatar image" src="<%= user.thumbnail %>">
+          <a class="ui grey button navbar" href="/profile/<%= user._id %> ">
+            <%= user.fullName %></a>
+          <a class="ui grey basic button navbar" href="/logout" id="logout-button">Logout</a>
+          <% } else { %>
+          <a class="ui grey button navbar" href="/register">Create Account</a>
+          <a class="ui grey basic button navbar" href="/login" id="login-button">Login</a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+    <% if (errorMsg && errorMsg.length > 0) { %>
+    <span id="error-message" data-msg="<%= errorMsg %>"></span>
+    <p id="error-toast"></p>
+    <% } %>
+
+    <% if (successMsg && successMsg.length > 0) { %>
+    <span id="success-message" data-suc="<%= successMsg %>"></span>
+    <p id="success-toast"></p>
+    <% } %>

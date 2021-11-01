@@ -1,0 +1,55 @@
+<%- include("../partials/top") %>
+
+<!-- <h1>Login</h1>
+
+<form action="/login" method="POST">
+    <input type="text" name="username" placeholder="username">
+    <input type="password" name="password" placeholder="password">
+
+    <input type="submit" value="Submit">
+</form>
+
+<a href="/auth/google">Login with google.</a> -->
+
+<!-- Grid -->
+<div class="ui grid centered">
+	<!-- column -->
+	<div class="fourteen wide mobile ten wide tablet six wide computer column">
+		<!-- Form -->
+		<form class="ui form login" action="/login" method="POST">
+			<div class="fields">
+				<div class="sixteen wide field">
+					<label>Username</label>
+					<input name="username" type="text" />
+				</div>
+			</div>
+			<div class="fields">
+				<div class="sixteen wide field">
+					<label>Password</label>
+					<input name="password" type="password" />
+				</div>
+			</div>
+			<div class="ui primary submit button fluid">Login</div>
+			<div class="ui error message"></div>
+
+			<!-- google sign in button -->
+			<h4 class="ui horizontal divider header">OR</h4>
+			<br />
+			<a href="/auth/google">
+				<div class="google-btn">
+					<div class="google-icon-wrapper">
+						<img
+							class="google-icon"
+							src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+						/>
+					</div>
+					<div class="google-btn-text">
+						<p class="btn-text"><b>Sign in with google</b></p>
+					</div>
+				</div>
+			</a>
+		</form>
+	</div>
+</div>
+
+<%- include("../partials/bottom") %>

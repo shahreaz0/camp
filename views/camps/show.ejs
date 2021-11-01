@@ -1,0 +1,140 @@
+<%- include("../partials/top") %>
+
+<div class="ui grid show">
+	<!-- 1st grid ------------------------------------- -->
+	<div class="sixteen wide mobile six wide tablet five wide computer column">
+		<div class="ui card show">
+			<div class="content">
+				<h1 class="header" href="/camps/<%= camp._id %>"><%= camp.name %></h1>
+				<span id="card__author">
+					by
+					<a href="/<%= camp.location %>/camps"><%= camp.location %></a>
+				</span>
+			</div>
+
+			<div class="image">
+				<img src="<%= camp.campImage.url %>" />
+			</div>
+			<div class="content">
+				<span>
+					<img class="ui avatar image" src="<%= camp.creator.thumbnail %> " />
+					<a
+						class="card-content-username"
+						href="/profile/<%= camp.creator._id %>"
+					>
+						<%= camp.creator.username %>
+					</a>
+				</span>
+				<div class="right floated meta" id="card-content-date">
+					<%= smallDate(camp.createdAt) %>
+				</div>
+			</div>
+
+			<!-- dynamic edit and delete button -->
+			<% if (user && camp.creator.equals(user._id)) { %>
+			<!-- edit button -->
+			<a class="ui button grey camp-edit-button" href="/camps/<%= camp._id %>/edit">
+				<i class="edit outline icon"></i>
+				Edit
+			</a>
+			<!-- delete button -->
+			<form
+				id="book-delete-form"
+				action="/camps/<%= camp._id %>?_method=DELETE"
+				method="POST"
+			>
+				<button
+					class="ui button red book-delete-button"
+					onclick="return confirm('Click Ok to delete post.');"
+				>
+					<i class="trash alternate outline icon"></i>
+					Delete
+				</button>
+			</form>
+			<% } %>
+		</div>
+	</div>
+
+	<!-- 2nd grid ------------------------------------- -->
+	<div class="sixteen wide mobile ten wide tablet eleven wide computer column">
+		<!-- author and description section -->
+		<div class="ui segments">
+			<!-- 1st segment -->
+
+			<!-- 2nd segment -->
+			<div class="ui segment">
+				<div id="book-description"><%- camp.description %></div>
+			</div>
+		</div>
+
+		<!-- comment section -->
+		<h4 class="ui header">
+			<i class="comment outline icon"></i>
+			Comments
+		</h4>
+
+		<% if (camp.comments.length === 0) { %>
+		<h4>No comment on this post.</h4>
+		<% } %> <% camp.comments.forEach(comment => { %>
+		<div class="ui comments">
+			<div class="comment">
+				<a class="avatar">
+					<img src="<%= user.thumbnail %>" />
+					<!-- <i class="user circle outline icon big"></i> -->
+				</a>
+				<div class="content">
+					<a class="author"><%= comment.author %></a>
+					<div class="metadata">
+						<span class="date"><%= dateFormat(comment.createdAt) %></span>
+					</div>
+					<div class="text"><%= comment.content %></div>
+					<div class="actions">
+						<% if (user && comment.author === user.username) { %>
+						<a
+							class="reply"
+							href="/camps/<%= camp._id %>/comments/<%= comment._id %>/edit"
+						>
+							Edit
+						</a>
+						<form
+							action="/camps/<%= camp._id %>/comments/<%= comment._id %>?_method=DELETE"
+							method="POST"
+							id="comment-delete-form"
+						>
+							<button
+								class="reply"
+								id="comment-delete-button"
+								onclick="return confirm('Click Ok to delete comment.');"
+							>
+								Delete
+							</button>
+						</form>
+						<% } %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<% }) %>
+
+		<!-- comment form -->
+		<% if (user) { %>
+		<div class="ui grid">
+			<div class="sixteen wide mobile eight wide computer column">
+				<form
+					class="ui reply form comment"
+					action="/camps/<%= camp._id %>/comments"
+					method="POST"
+				>
+					<div class="field">
+						<textarea rows="2" name="content"></textarea>
+					</div>
+					<button class="ui grey button">Comment</button>
+					<div class="ui error message"></div>
+				</form>
+			</div>
+		</div>
+		<% } %>
+	</div>
+</div>
+
+<%- include("../partials/bottom") %>
