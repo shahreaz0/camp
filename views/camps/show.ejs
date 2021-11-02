@@ -33,10 +33,16 @@
 			<!-- dynamic edit and delete button -->
 			<% if (user && camp.creator.equals(user._id)) { %>
 			<!-- edit button -->
-			<a class="ui button grey camp-edit-button" href="/camps/<%= camp._id %>/edit">
+
+			<a
+				class="ui button grey camp-edit-button"
+				href="/camps/<%= camp._id %>/edit"
+				style="margin: 0 0.5rem; width: 95% !important"
+			>
 				<i class="edit outline icon"></i>
 				Edit
 			</a>
+
 			<!-- delete button -->
 			<form
 				id="book-delete-form"

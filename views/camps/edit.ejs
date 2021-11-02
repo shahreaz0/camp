@@ -1,21 +1,66 @@
 <%- include("../partials/top") %>
 
-<h1>Edit Camp</h1>
+<div class="ui grid centered">
+	<!-- column -->
+	<div class="sixteen wide mobile fourteen wide tablet twelve wide computer column">
+		<!-- Form -->
+		<form
+			class="ui form add-book"
+			action="/camps/<%= camp._id %>?_method=PUT"
+			method="POST"
+			enctype="multipart/form-data"
+		>
+			<!-- first row 2 fields -->
+			<div class="fields">
+				<div class="required field eight wide">
+					<label>Camp Name</label>
+					<input type="text" name="name" value="<%= camp.name %> " />
+				</div>
+				<div class="required field eight wide">
+					<label>Camp Location</label>
+					<input type="text" name="location" />
+				</div>
+			</div>
+			<!-- Second row 1 fields -->
+			<div class="fields">
+				<div class="field sixteen wide">
+					<label>Description</label>
+					<textarea rows="8" name="description" id="add-book-textarea">
+                        <%= camp.description %>
+                    </textarea>
+				</div>
+			</div>
+			<!-- Third row 2 fields -->
+			<div class="fields">
+				<div class="required field sixteen wide">
+					<label>Camp Image</label>
+					<input name="campImg" type="file" accept="image/*" />
+				</div>
+			</div>
+			<!-- Forth row 2 fields and submit button -->
+			<div class="fields">
+				<div class="field four wide">
+					<label>Status</label>
+					<select class="ui dropdown" name="status">
+						<option value="public">Public</option>
+						<option value="private">Private</option>
+					</select>
+				</div>
 
-<form action="/camps/<%= camp._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+				<div class="required field four wide">
+					<label>Price Range</label>
+					<input type="text" name="price" />
+				</div>
 
-    <label for="name">CAMP NAME</label>
-    <input type="text" name="name" id="name" value="<%= camp.name %> ">
-    <br>
-    <label for="image">CAMP IMAGE</label>
-    <input type="file" name="campImg" id="image">
-    <br>
-    <label for="description">DESCRIPTION</label> <br>
-    <textarea name="description" id="description" cols="50" rows="5"><%= camp.description %> </textarea>
-    <br>
-    <input type="submit" value="Submit">
-
-
-</form>
+				<div class="field eight wide">
+					<label>&nbsp;&nbsp;&nbsp;</label>
+					<!-- <input type="submit" value="Add" > -->
+					<button class="ui grey submit button fluid">Add</button>
+				</div>
+			</div>
+			<div class="ui error message"></div>
+		</form>
+	</div>
+</div>
 
 <%- include("../partials/bottom") %>
